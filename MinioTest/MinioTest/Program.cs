@@ -24,31 +24,25 @@ namespace MinioTest
             AmazonS3Client s3Client = new AmazonS3Client("minioadmin", "minioadmin", config);
 
             PutBucketRequest pbr = new PutBucketRequest();
-            pbr.BucketName = "blobboa-10";
+            pbr.BucketName = "testbucket";
 
             S3BucketVersioningConfig sbvc = new S3BucketVersioningConfig();
             sbvc.Status = VersionStatus.Enabled;
 
             PutBucketVersioningRequest pbvr = new PutBucketVersioningRequest();
-            pbvr.BucketName = "blobboa-10";
+            pbvr.BucketName = "testbucket";
             pbvr.VersioningConfig = sbvc;
 
             PutObjectRequest por = new PutObjectRequest();
-            por.BucketName = "blobboa-10";
+            por.BucketName = "testbucket";
             por.Key = "testKey";
             por.ContentBody = "test";
 
 
-            try
-            {
-                s3Client.PutBucket(pbr);
-                s3Client.PutBucketVersioning(pbvr);
-                s3Client.PutObject(por);
-            }
-            catch (Exception e)
-            {
-                Console.Out.WriteLine(e);
-            }
+            s3Client.PutBucket(pbr);
+            s3Client.PutBucketVersioning(pbvr);
+            s3Client.PutObject(por);
+
 
             Console.Out.WriteLine("Done");
         }
